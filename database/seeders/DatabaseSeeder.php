@@ -19,5 +19,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Сидеры для расписания
+        $this->call([
+            DayPartitionSeeder::class,
+            BuildingSeeder::class,
+            TimeSlotSeeder::class,
+        ]);
     }
 }
