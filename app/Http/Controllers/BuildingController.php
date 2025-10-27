@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Discipline;
+use App\Models\Building;
 use Illuminate\Http\Request;
 
-class DisciplineController extends Controller
+class BuildingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class DisciplineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Discipline $discipline)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class DisciplineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Discipline $discipline)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class DisciplineController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Discipline $discipline)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,28 +58,29 @@ class DisciplineController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Discipline $discipline)
+    public function destroy(string $id)
     {
         //
     }
-    public function searchDisciplines(Request $request)
+
+    public function searchBuildings(Request $request)
     {
         $request->validate([
             "name" => "nullable|string",
         ]);
 
-        $query = Discipline::query();
+        $query = Building::query();
 
         if ($request->filled("name")) {
-            $disciplines = $query->where("name", 'like', '%' . $request->name . '%')->get();
+            $buildings = $query->where("name", 'like', '%' . $request->name . '%')->get();
         } else {
-            $disciplines = $query->limit(10)->get();
+            $buildings = $query->limit(10)->get();
         }
 
-        if ($disciplines->isEmpty()) {
-            return errorResponse('Дисциплины не найдены', 404);
+        if ($buildings->isEmpty()) {
+            return errorResponse('Корпуса не найдены', 404);
         }
 
-        return successResponse($disciplines, 'Дисциплины получены', 200);
+        return successResponse($buildings, 'Корпуса получены', 200);
     }
 }

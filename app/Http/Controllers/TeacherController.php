@@ -12,7 +12,35 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::latest()->paginate(10);
+
+        return $teachers;
+    }
+
+    public function searchTeachers(Request $request)
+    {
+        $request->validate([
+            "name" => "nullable|string|min:2",
+            "discipline_id" => "required|integer",
+        ]);
+
+        $query = Teacher::query();
+
+        $query->whereHas('disciplines', function ($q) use ($request) {
+            $q->where('disciplines.id', $request->discipline_id);
+        });
+
+        if ($request->filled('name')) {
+            $teachers = $query->where("name", 'like', '%' . $request->name . '%')->get();
+        } else {
+            $teachers = $query->limit(10)->get();
+        }
+
+        if ($teachers->isEmpty()) {
+            return errorResponse('Учителя не найдены', 404);
+        }
+
+        return successResponse($teachers, 'Учителя получены', 200);
     }
 
     /**
