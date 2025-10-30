@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
+
+Route::controller(AppController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+});
 
 Route::controller(TeacherController::class)->group(function () {
     Route::prefix('teachers')->group(function () {
