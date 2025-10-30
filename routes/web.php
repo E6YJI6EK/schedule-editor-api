@@ -4,9 +4,11 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\DisciplineController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\Configuration\GroupCollection;
 
 Route::controller(AppController::class)->group(function () {
     Route::get('/', 'index')->name('index');
@@ -39,5 +41,12 @@ Route::controller(BuildingController::class)->group(function () {
 Route::controller(LessonController::class)->group(function () {
     Route::prefix('lessons')->group(function () {
         Route::get('/create', 'create')->name('lessons.create');
+    });
+});
+
+
+Route::controller(GroupController::class)->group(function () {
+    Route::prefix('groups')->group(function () {
+        Route::get('/search', 'searchGroups')->name('groups.search');
     });
 });
