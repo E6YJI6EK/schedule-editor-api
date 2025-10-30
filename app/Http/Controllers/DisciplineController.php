@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Disciplines\SearchDisciplinesRequest;
 use App\Models\Discipline;
-use Illuminate\Http\Request;
+use App\Services\DisciplineService;
 
 class DisciplineController extends Controller
 {
+    public function __construct(private readonly DisciplineService $disciplineService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +30,7 @@ class DisciplineController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
         //
     }
@@ -50,7 +54,7 @@ class DisciplineController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Discipline $discipline)
+    public function update(\Illuminate\Http\Request $request, Discipline $discipline)
     {
         //
     }
@@ -62,19 +66,9 @@ class DisciplineController extends Controller
     {
         //
     }
-    public function searchDisciplines(Request $request)
+    public function searchDisciplines(SearchDisciplinesRequest $request)
     {
-        $request->validate([
-            "name" => "nullable|string",
-        ]);
-
-        $query = Discipline::query();
-
-        if ($request->filled("name")) {
-            $disciplines = $query->where("name", 'like', '%' . $request->name . '%')->get();
-        } else {
-            $disciplines = $query->limit(10)->get();
-        }
+        $disciplines = $this->disciplineService->search($request->validated());
 
         if ($disciplines->isEmpty()) {
             return errorResponse('Дисциплины не найдены', 404);

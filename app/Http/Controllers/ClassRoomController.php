@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClassRoom;
-use Illuminate\Http\Request;
+use App\Http\Requests\ClassRooms\SearchClassRoomsRequest;
+use App\Services\ClassRoomService;
 
 class ClassRoomController extends Controller
 {
+    public function __construct(private readonly ClassRoomService $classRoomService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +29,7 @@ class ClassRoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
         //
     }
@@ -50,7 +53,7 @@ class ClassRoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(\Illuminate\Http\Request $request, string $id)
     {
         //
     }
@@ -63,24 +66,9 @@ class ClassRoomController extends Controller
         //
     }
 
-    public function searchClassRooms(Request $request)
+    public function searchClassRooms(SearchClassRoomsRequest $request)
     {
-        $request->validate([
-            "number" => "nullable|string|min:1",
-            "building_id" => "required|integer",
-        ]);
-
-        $query = ClassRoom::query();
-
-        $query->whereHas('buildings', function ($q) use ($request) {
-            $q->where('buildings.id', $request->building_id);
-        });
-
-        if ($request->filled('number')) {
-            $classRooms = $query->where("number", 'like', '%' . $request->number . '%')->get();
-        } else {
-            $classRooms = $query->limit(10)->get();
-        }
+        $classRooms = $this->classRoomService->search($request->validated());
 
         if ($classRooms->isEmpty()) {
             return errorResponse('Аудитории не найдены', 404);

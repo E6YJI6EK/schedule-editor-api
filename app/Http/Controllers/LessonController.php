@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lesson;
-use Exception;
-use Illuminate\Http\Request;
+use App\Http\Requests\Lessons\CreateLessonRequest;
+use App\Services\LessonService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LessonController extends Controller
 {
+    public function __construct(private readonly LessonService $lessonService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -19,41 +22,25 @@ class LessonController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(CreateLessonRequest $request)
     {
-        $request->validate([
-            'teacher_id' => 'required|integer|exists:teachers,id',
-            'class_room_id' => 'required|integer|exists:class_rooms,id',
-            'time_slot_id' => 'required|integer|exists:time_slots,id',
-            'discipline_id' => 'required|integer|exists:disciplines,id',
-            'group_id' => 'required|integer|exists:groups,id'
-        ]);
+        $result = $this->lessonService->create($request->validated());
 
-        // Проверка на дубликат (если нужно)
-        $existingLesson = Lesson::where([
-            'teacher_id' => $request->teacher_id,
-            'class_room_id' => $request->class_room_id,
-            'time_slot_id' => $request->time_slot_id,
-            'discipline_id' => $request->discipline_id,
-            'group_id' => $request->group_id
-        ])->exists();
-
-        if ($existingLesson) {
+        if (isset($result['error']) && $result['error'] === 'duplicate') {
             return errorResponse('Такая пара уже существует', 409);
         }
 
-        try {
-            $lesson = Lesson::create($request->all());
-            return successResponse($lesson, 'Пара успешно создана', 201);
-        } catch (Exception $e) {
-            return errorResponse('Ошибка при создании пары', 500, $e->getMessage());
+        if (isset($result['exception'])) {
+            return errorResponse('Ошибка при создании пары', 500, $result['exception']);
         }
+
+        return successResponse($result['lesson'], 'Пара успешно создана', 201);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
         //
     }
@@ -77,7 +64,7 @@ class LessonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(\Illuminate\Http\Request $request, string $id)
     {
         try {
             $request->validate([
@@ -87,10 +74,12 @@ class LessonController extends Controller
                 'discipline_id' => 'integer|exists:disciplines,id',
                 'group_id' => 'integer|exists:groups,id'
             ]);
-            $lesson = Lesson::findOrFail($id);
+            $lesson = \App\Models\Lesson::findOrFail($id);
             $lesson->update($request->all());
             return successResponse($lesson, 'Пара была обновлена', 200);
-        } catch (Exception $e) {
+        } catch (NotFoundHttpException $e) {
+            return errorResponse('Пара не найдена', 404, $e->getMessage());
+        } catch (\Exception $e) {
             return errorResponse('Ошибка', 500, '');
         }
     }

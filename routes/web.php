@@ -34,14 +34,14 @@ Route::controller(ClassRoomController::class)->group(function () {
 
 Route::controller(BuildingController::class)->group(function () {
     Route::prefix('buildings')->group(function () {
-        Route::get('/search', 'searchBuilding')->name('buildings.search');
+        Route::get('/search', 'searchBuildings')->name('buildings.search');
     });
 });
 
 Route::controller(LessonController::class)->group(function () {
     Route::prefix('lessons')->group(function () {
-        Route::get('/create', 'create')->name('lessons.create');
-        Route::post('/update', 'update')->name('lessons.update');
+        Route::post('/create', 'create')->name('lessons.create');
+        Route::put('/update/{id}', 'update')->name('lessons.update');
     });
 });
 

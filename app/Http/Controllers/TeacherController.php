@@ -2,39 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
-use Illuminate\Http\Request;
+use App\Http\Requests\Teachers\SearchTeachersRequest;
+use App\Services\TeacherService;
 
 class TeacherController extends Controller
 {
+    public function __construct(private readonly TeacherService $teacherService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $teachers = Teacher::latest()->paginate(10);
-
-        return $teachers;
+        return $this->teacherService->paginateLatest(10);
     }
 
-    public function searchTeachers(Request $request)
+    public function searchTeachers(SearchTeachersRequest $request)
     {
-        $request->validate([
-            "name" => "nullable|string|min:2",
-            "discipline_id" => "required|integer",
-        ]);
-
-        $query = Teacher::query();
-
-        $query->whereHas('disciplines', function ($q) use ($request) {
-            $q->where('disciplines.id', $request->discipline_id);
-        });
-
-        if ($request->filled('name')) {
-            $teachers = $query->where("name", 'like', '%' . $request->name . '%')->get();
-        } else {
-            $teachers = $query->limit(10)->get();
-        }
+        $teachers = $this->teacherService->search($request->validated());
 
         if ($teachers->isEmpty()) {
             return errorResponse('Учителя не найдены', 404);
@@ -54,7 +40,7 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
         //
     }
@@ -62,7 +48,7 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Teacher $teacher)
+    public function show(\App\Models\Teacher $teacher)
     {
         //
     }
@@ -70,7 +56,7 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Teacher $teacher)
+    public function edit(\App\Models\Teacher $teacher)
     {
         //
     }
@@ -78,7 +64,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(\Illuminate\Http\Request $request, \App\Models\Teacher $teacher)
     {
         //
     }
@@ -86,7 +72,7 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Teacher $teacher)
+    public function destroy(\App\Models\Teacher $teacher)
     {
         //
     }

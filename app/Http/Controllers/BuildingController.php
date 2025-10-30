@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Building;
-use Illuminate\Http\Request;
+use App\Http\Requests\Buildings\SearchBuildingsRequest;
+use App\Services\BuildingService;
 
 class BuildingController extends Controller
 {
+    public function __construct(private readonly BuildingService $buildingService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +29,7 @@ class BuildingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
         //
     }
@@ -50,7 +53,7 @@ class BuildingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(\Illuminate\Http\Request $request, string $id)
     {
         //
     }
@@ -63,19 +66,9 @@ class BuildingController extends Controller
         //
     }
 
-    public function searchBuildings(Request $request)
+    public function searchBuildings(SearchBuildingsRequest $request)
     {
-        $request->validate([
-            "name" => "nullable|string",
-        ]);
-
-        $query = Building::query();
-
-        if ($request->filled("name")) {
-            $buildings = $query->where("name", 'like', '%' . $request->name . '%')->get();
-        } else {
-            $buildings = $query->limit(10)->get();
-        }
+        $buildings = $this->buildingService->search($request->validated());
 
         if ($buildings->isEmpty()) {
             return errorResponse('Корпуса не найдены', 404);
