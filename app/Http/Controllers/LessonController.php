@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
+use Exception;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -27,7 +28,7 @@ class LessonController extends Controller
             'discipline_id' => 'required|integer|exists:disciplines,id',
             'group_id' => 'required|integer|exists:groups,id'
         ]);
-    
+
         // Проверка на дубликат (если нужно)
         $existingLesson = Lesson::where([
             'teacher_id' => $request->teacher_id,
@@ -36,15 +37,15 @@ class LessonController extends Controller
             'discipline_id' => $request->discipline_id,
             'group_id' => $request->group_id
         ])->exists();
-    
+
         if ($existingLesson) {
             return errorResponse('Такая пара уже существует', 409);
         }
-    
+
         try {
             $lesson = Lesson::create($request->all());
             return successResponse($lesson, 'Пара успешно создана', 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return errorResponse('Ошибка при создании пары', 500, $e->getMessage());
         }
     }
@@ -78,7 +79,20 @@ class LessonController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $request->validate([
+                'teacher_id' => 'integer|exists:teachers,id',
+                'class_room_id' => 'integer|exists:class_rooms,id',
+                'time_slot_id' => 'integer|exists:time_slots,id',
+                'discipline_id' => 'integer|exists:disciplines,id',
+                'group_id' => 'integer|exists:groups,id'
+            ]);
+            $lesson = Lesson::findOrFail($id);
+            $lesson->update($request->all());
+            return successResponse($lesson, 'Пара была обновлена', 200);
+        } catch (Exception $e) {
+            return errorResponse('Ошибка', 500, '');
+        }
     }
 
     /**

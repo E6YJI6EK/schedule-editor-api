@@ -41,6 +41,7 @@ Route::controller(BuildingController::class)->group(function () {
 Route::controller(LessonController::class)->group(function () {
     Route::prefix('lessons')->group(function () {
         Route::get('/create', 'create')->name('lessons.create');
+        Route::post('/update', 'update')->name('lessons.update');
     });
 });
 
