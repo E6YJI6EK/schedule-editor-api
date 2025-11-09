@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
 
         // Сидеры для расписания
         $this->call([
-            ExcelSeeder::class,
+            // ExcelSeeder::class,
+            ClassRoomSeeder::class,
             // DayPartitionSeeder::class,
             // BuildingSeeder::class,
             // TimeSlotSeeder::class,
