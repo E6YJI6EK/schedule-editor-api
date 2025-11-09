@@ -11,7 +11,7 @@ class AppRoutesTest extends TestCase
 
     public function test_index_route_returns_alive_response(): void
     {
-        $response = $this->get('/');
+        $response = $this->get('/api');
 
         $response->assertStatus(200)
             ->assertJson([

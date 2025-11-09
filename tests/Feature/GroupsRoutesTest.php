@@ -14,7 +14,7 @@ class GroupsRoutesTest extends TestCase
 
     public function test_groups_search_validation_errors_when_missing_required_fields(): void
     {
-        $response = $this->getJson('/groups/search');
+        $response = $this->getJson('/api/groups/search');
         $response->assertStatus(422);
     }
 
@@ -30,7 +30,7 @@ class GroupsRoutesTest extends TestCase
             'discipline_id' => 1,
         ]);
 
-        $response = $this->getJson('/groups/search?' . $query);
+        $response = $this->getJson('/api/groups/search?' . $query);
 
         $response->assertStatus(404)
             ->assertJson([

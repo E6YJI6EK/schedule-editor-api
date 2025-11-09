@@ -11,7 +11,7 @@ class DisciplinesRoutesTest extends TestCase
 
     public function test_disciplines_search_returns_404_when_no_results(): void
     {
-        $response = $this->getJson('/disciplines/search');
+        $response = $this->getJson('/api/disciplines/search');
 
         $response->assertStatus(404)
             ->assertJson([

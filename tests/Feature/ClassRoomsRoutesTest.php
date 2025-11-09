@@ -12,7 +12,7 @@ class ClassRoomsRoutesTest extends TestCase
 
     public function test_class_rooms_search_validation_errors_when_missing_building_id(): void
     {
-        $response = $this->getJson('/class-rooms/search');
+        $response = $this->getJson('/api/class-rooms/search');
         $response->assertStatus(422);
     }
 
@@ -20,7 +20,7 @@ class ClassRoomsRoutesTest extends TestCase
     {
         $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
 
-        $response = $this->getJson('/class-rooms/search?building_id=' . $building->id);
+        $response = $this->getJson('/api/class-rooms/search?building_id=' . $building->id);
 
         $response->assertStatus(404)
             ->assertJson([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Lessons\CreateLessonRequest;
+use App\Http\Requests\Lessons\GetScheduleRequest;
 use App\Services\LessonService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -90,5 +91,23 @@ class LessonController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Получить расписание для групп
+     */
+    public function getSchedule(GetScheduleRequest $request)
+    {
+        $validated = $request->validated();
+        $lessons = $this->lessonService->getSchedule(
+            $validated['group_ids'],
+            $validated['is_upper_week']
+        );
+
+        if ($lessons->isEmpty()) {
+            return errorResponse('Расписание не найдено', 404);
+        }
+
+        return successResponse($lessons, 'Расписание получено', 200);
     }
 }

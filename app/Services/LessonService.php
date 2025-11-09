@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\WeekType;
 use App\Models\Lesson;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 
 class LessonService
 {
@@ -27,6 +29,18 @@ class LessonService
         } catch (Exception $e) {
             return ['exception' => $e->getMessage()];
         }
+    }
+
+    public function getSchedule(array $groupIds, bool $isUpperWeek): Collection
+    {
+        $weekType = $isUpperWeek ? WeekType::Upper : WeekType::Lower;
+
+        return Lesson::whereIn('group_id', $groupIds)
+            ->whereHas('timeSlot', function ($query) use ($weekType) {
+                $query->where('week_type', $weekType);
+            })
+            ->with(['teacher', 'classRoom', 'timeSlot', 'discipline', 'group'])
+            ->get();
     }
 }
 

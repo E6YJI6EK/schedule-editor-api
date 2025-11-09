@@ -11,7 +11,7 @@ class BuildingsRoutesTest extends TestCase
 
     public function test_buildings_search_returns_404_when_no_results(): void
     {
-        $response = $this->getJson('/buildings/search');
+        $response = $this->getJson('/api/buildings/search');
 
         $response->assertStatus(404)
             ->assertJson([

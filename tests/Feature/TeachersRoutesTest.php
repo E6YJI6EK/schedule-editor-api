@@ -12,7 +12,7 @@ class TeachersRoutesTest extends TestCase
 
     public function test_teachers_search_validation_errors_when_missing_discipline_id(): void
     {
-        $response = $this->getJson('/teachers/search');
+        $response = $this->getJson('/api/teachers/search');
         $response->assertStatus(422);
     }
 
@@ -20,7 +20,7 @@ class TeachersRoutesTest extends TestCase
     {
         $discipline = Discipline::create(['name' => 'Math']);
 
-        $response = $this->getJson('/teachers/search?discipline_id=' . $discipline->id);
+        $response = $this->getJson('/api/teachers/search?discipline_id=' . $discipline->id);
 
         $response->assertStatus(404)
             ->assertJson([
