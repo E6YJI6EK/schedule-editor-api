@@ -39,7 +39,13 @@ class LessonService
             ->whereHas('timeSlot', function ($query) use ($weekType) {
                 $query->where('week_type', $weekType);
             })
-            ->with(['teacher', 'classRoom', 'timeSlot', 'discipline', 'group'])
+            ->with([
+                'teacher',
+                'classRoom.building',
+                'timeSlot.dayPartition',
+                'discipline',
+                'group'
+            ])
             ->get();
     }
 }

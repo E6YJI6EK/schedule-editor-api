@@ -50,5 +50,6 @@ Route::controller(LessonController::class)->group(function () {
 Route::controller(GroupController::class)->group(function () {
     Route::prefix('groups')->group(function () {
         Route::get('/search', 'searchGroups')->name('groups.search');
+        Route::get('/search-by-name', 'searchGroupsByName')->name('groups.search');
     });
 });

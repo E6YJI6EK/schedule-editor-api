@@ -23,6 +23,12 @@ class GroupService
 
         return $query->limit(10)->get();
     }
+
+    public function searchGroupsByName(array $filters): Collection
+    {
+        $query = Group::query();
+        return $query->where('name', 'like', '%' . $filters['name'] . '%')->get();
+    }
 }
 
 
