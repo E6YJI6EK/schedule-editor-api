@@ -43,6 +43,7 @@ Route::controller(LessonController::class)->group(function () {
         Route::post('/create', 'create')->name('lessons.create');
         Route::put('/update/{id}', 'update')->name('lessons.update');
         Route::get('/schedule', 'getSchedule')->name('lessons.schedule');
+        Route::get('/time-slot', 'getTimeSlot')->name('lessons.timeSlot');
     });
 });
 

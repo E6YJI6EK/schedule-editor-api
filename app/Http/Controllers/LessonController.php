@@ -110,4 +110,28 @@ class LessonController extends Controller
 
         return successResponse($lessons, 'Расписание получено', 200);
     }
+
+    /**
+     * Получить ID временного слота по параметрам
+     */
+    public function getTimeSlot(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'week_type' => 'required|string|in:upper,lower',
+            'day' => 'required|integer|min:1|max:7',
+            'day_partition_id' => 'required|integer|min:1|max:6',
+        ]);
+
+        $timeSlot = \App\Models\TimeSlot::where([
+            'week_type' => $request->week_type,
+            'day' => $request->day,
+            'day_partition_id' => $request->day_partition_id,
+        ])->first();
+
+        if (!$timeSlot) {
+            return errorResponse('Временной слот не найден', 404);
+        }
+
+        return successResponse(['id' => $timeSlot->id], 'Временной слот найден', 200);
+    }
 }
