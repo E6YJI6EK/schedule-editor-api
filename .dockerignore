@@ -1,0 +1,15 @@
+# Global ignores
+.git
+.gitignore
+README.md
+
+# Backend build artifacts
+vendor
+storage/logs
+node_modules
+
+# Frontend folders to exclude from image context
+schedule-editor-app/node_modules
+schedule-editor-app/dist
+schedule-editor-app/.env
+schedule-editor-app/.vite
