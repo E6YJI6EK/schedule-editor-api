@@ -37,6 +37,8 @@ services:
       DB_DATABASE: schedule_editor_api
       DB_USERNAME: root
       DB_PASSWORD: secret
+    volumes:
+      - .:/var/www/html
     ports:
       - "8080:80"
 
