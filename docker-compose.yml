@@ -39,6 +39,7 @@ services:
       DB_PASSWORD: secret
     volumes:
       - .:/var/www/html
+      - /var/www/html/vendor
     ports:
       - "8080:80"
 
@@ -57,10 +58,14 @@ services:
       API_PREFIX: /api
       API_PROXY_TARGET: http://backend/api/
       VITE_API_BASE: /api
+      CHOKIDAR_USEPOLLING: "true"
     command: sh -c "npm run serve & sleep 5 && npm run dev -- --host"
     ports:
       - "5173:5173"
       - "3000:3000"
+    volumes:
+      - ./schedule-editor-app:/app/schedule-editor-app
+      - /app/schedule-editor-app/node_modules
 
 volumes:
   db_data:
