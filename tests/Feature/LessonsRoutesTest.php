@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\Course;
 use App\Enums\Day;
+use App\Enums\Role;
 use App\Enums\EducationForm;
 use App\Enums\WeekType;
 use App\Models\Building;
@@ -15,6 +16,7 @@ use App\Models\Institute;
 use App\Models\Lesson;
 use App\Models\Teacher;
 use App\Models\TimeSlot;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -24,12 +26,14 @@ class LessonsRoutesTest extends TestCase
 
     public function test_lessons_create_requires_validation(): void
     {
+        $this->actingAs(User::factory()->create(['role' => Role::Employee]));
         $response = $this->postJson('/api/lessons/create', []);
         $response->assertStatus(422);
     }
 
     public function test_lessons_create_success_and_duplicate_conflict(): void
     {
+        $this->actingAs(User::factory()->create(['role' => Role::Employee]));
         $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
         $classRoom = ClassRoom::create(['number' => '101', 'building_id' => $building->id]);
         $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
@@ -75,6 +79,7 @@ class LessonsRoutesTest extends TestCase
 
     public function test_lessons_update_validates_and_updates(): void
     {
+        $this->actingAs(User::factory()->create(['role' => Role::Employee]));
         $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
         $classRoom = ClassRoom::create(['number' => '101', 'building_id' => $building->id]);
         $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
