@@ -24,6 +24,7 @@ Route::get('/lessons/time-slot', [LessonController::class, 'getTimeSlot'])->name
 // Authenticated
 Route::middleware('auth')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/auth/me', [AuthController::class, 'me'])->name('auth.me');
 
     // Employee + Admin
     Route::middleware('role:ADMIN,EMPLOYEE')->group(function () {
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     // Admin only
     Route::middleware('role:ADMIN')->group(function () {
         Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register');
+        Route::get('/employees', [AuthController::class, 'employees'])->name('employees.index');
         Route::delete('/employees/{id}', [AuthController::class, 'deleteEmployee'])->name('employees.delete');
     });
 });

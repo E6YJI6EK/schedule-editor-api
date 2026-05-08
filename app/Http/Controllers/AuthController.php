@@ -44,6 +44,17 @@ class AuthController extends Controller
         return successResponse(null, 'Выход выполнен', 200);
     }
 
+    public function me(Request $request)
+    {
+        return successResponse($request->user(), 'OK', 200);
+    }
+
+    public function employees()
+    {
+        $employees = User::where('role', Role::Employee)->get();
+        return successResponse($employees, 'OK', 200);
+    }
+
     public function deleteEmployee(int $id)
     {
         $user = User::find($id);
