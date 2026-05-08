@@ -31,6 +31,8 @@ Route::get('/disciplines/{discipline}', [DisciplineController::class, 'show'])->
 Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/teachers/{teacher}', [TeacherController::class, 'show'])->name('teachers.show');
 Route::get('/lessons/schedule', [LessonController::class, 'getSchedule'])->name('lessons.schedule');
+Route::get('/lessons/schedule/by-teacher', [LessonController::class, 'getScheduleByTeacher'])->name('lessons.schedule.byTeacher');
+Route::get('/lessons/schedule/by-classroom', [LessonController::class, 'getScheduleByClassroom'])->name('lessons.schedule.byClassroom');
 Route::get('/lessons/time-slot', [LessonController::class, 'getTimeSlot'])->name('lessons.timeSlot');
 Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
 Route::get('/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');

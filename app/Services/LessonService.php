@@ -74,6 +74,42 @@ class LessonService
             ->get();
     }
 
+    public function getScheduleByTeacher(int $teacherId, bool $isUpperWeek): Collection
+    {
+        $weekType = $isUpperWeek ? WeekType::Upper : WeekType::Lower;
+
+        return Lesson::where('teacher_id', $teacherId)
+            ->whereHas('timeSlot', function ($query) use ($weekType) {
+                $query->where('week_type', $weekType);
+            })
+            ->with([
+                'teacher',
+                'classRoom.building',
+                'timeSlot.dayPartition',
+                'discipline',
+                'group',
+            ])
+            ->get();
+    }
+
+    public function getScheduleByClassroom(int $classRoomId, bool $isUpperWeek): Collection
+    {
+        $weekType = $isUpperWeek ? WeekType::Upper : WeekType::Lower;
+
+        return Lesson::where('class_room_id', $classRoomId)
+            ->whereHas('timeSlot', function ($query) use ($weekType) {
+                $query->where('week_type', $weekType);
+            })
+            ->with([
+                'teacher',
+                'classRoom.building',
+                'timeSlot.dayPartition',
+                'discipline',
+                'group',
+            ])
+            ->get();
+    }
+
     public function findTimeSlot(array $filters): ?TimeSlot
     {
         return TimeSlot::where([

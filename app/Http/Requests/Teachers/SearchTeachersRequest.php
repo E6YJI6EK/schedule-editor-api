@@ -15,7 +15,7 @@ class SearchTeachersRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|min:2',
-            'discipline_id' => 'required|integer|exists:disciplines,id',
+            'discipline_id' => 'nullable|integer|exists:disciplines,id',
         ];
     }
 }

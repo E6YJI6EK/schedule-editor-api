@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Lessons\CreateLessonRequest;
+use App\Http\Requests\Lessons\GetScheduleByClassroomRequest;
+use App\Http\Requests\Lessons\GetScheduleByTeacherRequest;
 use App\Http\Requests\Lessons\GetScheduleRequest;
 use App\Http\Requests\Lessons\GetTimeSlotRequest;
 use App\Http\Requests\Lessons\UpdateLessonRequest;
@@ -59,6 +61,36 @@ class LessonController extends Controller
         $validated = $request->validated();
         $lessons = $this->lessonService->getSchedule(
             $validated['group_ids'],
+            $validated['is_upper_week']
+        );
+
+        if ($lessons->isEmpty()) {
+            return errorResponse('Расписание не найдено', 404);
+        }
+
+        return successResponse($lessons, 'Расписание получено', 200);
+    }
+
+    public function getScheduleByTeacher(GetScheduleByTeacherRequest $request)
+    {
+        $validated = $request->validated();
+        $lessons = $this->lessonService->getScheduleByTeacher(
+            $validated['teacher_id'],
+            $validated['is_upper_week']
+        );
+
+        if ($lessons->isEmpty()) {
+            return errorResponse('Расписание не найдено', 404);
+        }
+
+        return successResponse($lessons, 'Расписание получено', 200);
+    }
+
+    public function getScheduleByClassroom(GetScheduleByClassroomRequest $request)
+    {
+        $validated = $request->validated();
+        $lessons = $this->lessonService->getScheduleByClassroom(
+            $validated['classroom_id'],
             $validated['is_upper_week']
         );
 
