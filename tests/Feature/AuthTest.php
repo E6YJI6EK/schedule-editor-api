@@ -302,4 +302,48 @@ class AuthTest extends TestCase
 
         $response->assertStatus(403)->assertJsonPath('success', false);
     }
+
+    // --- Me (authenticated) ---
+
+    public function test_me_returns_current_user(): void
+    {
+        $user = User::factory()->create(['role' => Role::Employee]);
+
+        $this->actingAs($user)->getJson('/api/auth/me')
+            ->assertStatus(200)
+            ->assertJsonPath('success', true)
+            ->assertJsonPath('data.id', $user->id)
+            ->assertJsonPath('data.email', $user->email);
+    }
+
+    public function test_me_requires_auth(): void
+    {
+        $this->getJson('/api/auth/me')->assertStatus(401);
+    }
+
+    // --- Employees list (admin only) ---
+
+    public function test_employees_returns_list_as_admin(): void
+    {
+        $admin = User::factory()->create(['role' => Role::Admin]);
+        User::factory()->create(['role' => Role::Employee]);
+        User::factory()->create(['role' => Role::Employee]);
+
+        $this->actingAs($admin)->getJson('/api/employees')
+            ->assertStatus(200)
+            ->assertJsonPath('success', true)
+            ->assertJsonCount(2, 'data');
+    }
+
+    public function test_employees_requires_auth(): void
+    {
+        $this->getJson('/api/employees')->assertStatus(401);
+    }
+
+    public function test_employees_requires_admin(): void
+    {
+        $employee = User::factory()->create(['role' => Role::Employee]);
+
+        $this->actingAs($employee)->getJson('/api/employees')->assertStatus(403);
+    }
 }

@@ -27,7 +27,7 @@ class LessonsRoutesTest extends TestCase
     public function test_lessons_create_requires_validation(): void
     {
         $this->actingAs(User::factory()->create(['role' => Role::Employee]));
-        $response = $this->postJson('/api/lessons/create', []);
+        $response = $this->postJson('/api/lessons', []);
         $response->assertStatus(422);
     }
 
@@ -60,7 +60,7 @@ class LessonsRoutesTest extends TestCase
             'group_id' => $group->id,
         ];
 
-        $response = $this->postJson('/api/lessons/create', $payload);
+        $response = $this->postJson('/api/lessons', $payload);
         $response->assertStatus(201)
             ->assertJson([
                 'success' => true,
@@ -68,7 +68,7 @@ class LessonsRoutesTest extends TestCase
                 'status' => 201,
             ]);
 
-        $duplicate = $this->postJson('/api/lessons/create', $payload);
+        $duplicate = $this->postJson('/api/lessons', $payload);
         $duplicate->assertStatus(409)
             ->assertJson([
                 'success' => false,
@@ -106,13 +106,13 @@ class LessonsRoutesTest extends TestCase
             'group_id' => $group->id,
         ];
 
-        $created = $this->postJson('/api/lessons/create', $createPayload)->json('data');
+        $created = $this->postJson('/api/lessons', $createPayload)->json('data');
 
         $updatePayload = [
             'group_id' => $group->id,
         ];
 
-        $updateResponse = $this->putJson('/api/lessons/update/' . $created['id'], $updatePayload);
+        $updateResponse = $this->putJson('/api/lessons/' . $created['id'], $updatePayload);
         $updateResponse->assertStatus(200)
             ->assertJson([
                 'success' => true,
@@ -385,6 +385,129 @@ class LessonsRoutesTest extends TestCase
         $this->assertEquals($timeSlot->id, $data['time_slot']['id']);
         $this->assertEquals($discipline->id, $data['discipline']['id']);
         $this->assertEquals($group->id, $data['group']['id']);
+    }
+
+    // ── index ──────────────────────────────────────────────────────────────
+
+    public function test_lessons_index_returns_all(): void
+    {
+        $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
+        $classRoom = ClassRoom::create(['number' => '101', 'building_id' => $building->id]);
+        $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
+        $timeSlot = TimeSlot::create(['week_type' => WeekType::Upper, 'day' => Day::Monday, 'day_partition_id' => $dayPartition->id]);
+        $discipline = Discipline::create(['name' => 'Math']);
+        $teacher = Teacher::create(['name' => 'John']);
+        $institute = Institute::create(['name' => 'Tech']);
+        $group = Group::create(['name' => 'A-01', 'course' => Course::First, 'education_form' => EducationForm::Intramural, 'institute_id' => $institute->id]);
+
+        Lesson::create(['teacher_id' => $teacher->id, 'class_room_id' => $classRoom->id, 'time_slot_id' => $timeSlot->id, 'discipline_id' => $discipline->id, 'group_id' => $group->id]);
+        Lesson::create(['teacher_id' => $teacher->id, 'class_room_id' => $classRoom->id, 'time_slot_id' => $timeSlot->id, 'discipline_id' => $discipline->id, 'group_id' => $group->id]);
+
+        $this->getJson('/api/lessons')
+            ->assertStatus(200)
+            ->assertJson(['success' => true, 'message' => 'Пары получены'])
+            ->assertJsonCount(2, 'data');
+    }
+
+    public function test_lessons_index_returns_empty(): void
+    {
+        $this->getJson('/api/lessons')
+            ->assertStatus(200)
+            ->assertJson(['success' => true, 'data' => []]);
+    }
+
+    // ── show ───────────────────────────────────────────────────────────────
+
+    public function test_lessons_show_returns_lesson(): void
+    {
+        $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
+        $classRoom = ClassRoom::create(['number' => '101', 'building_id' => $building->id]);
+        $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
+        $timeSlot = TimeSlot::create(['week_type' => WeekType::Upper, 'day' => Day::Monday, 'day_partition_id' => $dayPartition->id]);
+        $discipline = Discipline::create(['name' => 'Math']);
+        $teacher = Teacher::create(['name' => 'John']);
+        $institute = Institute::create(['name' => 'Tech']);
+        $group = Group::create(['name' => 'A-01', 'course' => Course::First, 'education_form' => EducationForm::Intramural, 'institute_id' => $institute->id]);
+
+        $lesson = Lesson::create(['teacher_id' => $teacher->id, 'class_room_id' => $classRoom->id, 'time_slot_id' => $timeSlot->id, 'discipline_id' => $discipline->id, 'group_id' => $group->id]);
+
+        $this->getJson('/api/lessons/' . $lesson->id)
+            ->assertStatus(200)
+            ->assertJson(['success' => true, 'message' => 'Пара получена'])
+            ->assertJsonPath('data.id', $lesson->id);
+    }
+
+    public function test_lessons_show_returns_404_when_not_found(): void
+    {
+        $this->getJson('/api/lessons/999')->assertStatus(404);
+    }
+
+    // ── destroy ────────────────────────────────────────────────────────────
+
+    public function test_lessons_destroy_success_as_employee(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => Role::Employee]));
+
+        $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
+        $classRoom = ClassRoom::create(['number' => '101', 'building_id' => $building->id]);
+        $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
+        $timeSlot = TimeSlot::create(['week_type' => WeekType::Upper, 'day' => Day::Monday, 'day_partition_id' => $dayPartition->id]);
+        $discipline = Discipline::create(['name' => 'Math']);
+        $teacher = Teacher::create(['name' => 'John']);
+        $institute = Institute::create(['name' => 'Tech']);
+        $group = Group::create(['name' => 'A-01', 'course' => Course::First, 'education_form' => EducationForm::Intramural, 'institute_id' => $institute->id]);
+
+        $lesson = Lesson::create(['teacher_id' => $teacher->id, 'class_room_id' => $classRoom->id, 'time_slot_id' => $timeSlot->id, 'discipline_id' => $discipline->id, 'group_id' => $group->id]);
+
+        $this->deleteJson('/api/lessons/' . $lesson->id)
+            ->assertStatus(200)
+            ->assertJson(['success' => true, 'message' => 'Пара удалена']);
+
+        $this->assertDatabaseMissing('lessons', ['id' => $lesson->id]);
+    }
+
+    public function test_lessons_destroy_requires_auth(): void
+    {
+        $building = Building::create(['name' => 'Main', 'short_name' => 'M']);
+        $classRoom = ClassRoom::create(['number' => '101', 'building_id' => $building->id]);
+        $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
+        $timeSlot = TimeSlot::create(['week_type' => WeekType::Upper, 'day' => Day::Monday, 'day_partition_id' => $dayPartition->id]);
+        $discipline = Discipline::create(['name' => 'Math']);
+        $teacher = Teacher::create(['name' => 'John']);
+        $institute = Institute::create(['name' => 'Tech']);
+        $group = Group::create(['name' => 'A-01', 'course' => Course::First, 'education_form' => EducationForm::Intramural, 'institute_id' => $institute->id]);
+
+        $lesson = Lesson::create(['teacher_id' => $teacher->id, 'class_room_id' => $classRoom->id, 'time_slot_id' => $timeSlot->id, 'discipline_id' => $discipline->id, 'group_id' => $group->id]);
+
+        $this->deleteJson('/api/lessons/' . $lesson->id)->assertStatus(401);
+    }
+
+    // ── time-slot ──────────────────────────────────────────────────────────
+
+    public function test_lessons_get_time_slot_returns_result(): void
+    {
+        $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
+        TimeSlot::create(['week_type' => WeekType::Upper, 'day' => Day::Monday, 'day_partition_id' => $dayPartition->id]);
+
+        $this->getJson('/api/lessons/time-slot?week_type=upper&day=1&day_partition_id=' . $dayPartition->id)
+            ->assertStatus(200)
+            ->assertJson(['success' => true, 'message' => 'Временной слот найден'])
+            ->assertJsonStructure(['data' => ['id']]);
+    }
+
+    public function test_lessons_get_time_slot_returns_404_when_not_found(): void
+    {
+        $dayPartition = DayPartition::create(['start_time' => '08:30', 'end_time' => '10:00']);
+
+        $this->getJson('/api/lessons/time-slot?week_type=upper&day=1&day_partition_id=' . $dayPartition->id)
+            ->assertStatus(404)
+            ->assertJson(['success' => false, 'message' => 'Временной слот не найден']);
+    }
+
+    public function test_lessons_get_time_slot_requires_validation(): void
+    {
+        $this->getJson('/api/lessons/time-slot')
+            ->assertStatus(422);
     }
 }
 
