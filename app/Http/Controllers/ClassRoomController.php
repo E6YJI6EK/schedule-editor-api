@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClassRooms\SearchClassRoomsRequest;
+use App\Http\Requests\ClassRooms\StoreClassRoomRequest;
+use App\Http\Requests\ClassRooms\UpdateClassRoomRequest;
+use App\Models\ClassRoom;
 use App\Services\ClassRoomService;
 
 class ClassRoomController extends Controller
@@ -10,60 +13,36 @@ class ClassRoomController extends Controller
     public function __construct(private readonly ClassRoomService $classRoomService)
     {
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        return successResponse($this->classRoomService->all(), 'Аудитории получены', 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreClassRoomRequest $request)
     {
-        //
+        $classRoom = $this->classRoomService->store($request->validated());
+
+        return successResponse($classRoom, 'Аудитория создана', 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(\Illuminate\Http\Request $request)
+    public function show(ClassRoom $classRoom)
     {
-        //
+        return successResponse($this->classRoomService->find($classRoom->id), 'Аудитория получена', 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(UpdateClassRoomRequest $request, ClassRoom $classRoom)
     {
-        //
+        $updated = $this->classRoomService->update($classRoom, $request->validated());
+
+        return successResponse($updated, 'Аудитория обновлена', 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(ClassRoom $classRoom)
     {
-        //
-    }
+        $this->classRoomService->delete($classRoom);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(\Illuminate\Http\Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return successResponse(null, 'Аудитория удалена', 200);
     }
 
     public function searchClassRooms(SearchClassRoomsRequest $request)

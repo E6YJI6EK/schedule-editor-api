@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Role;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function __construct(private readonly UserService $userService)
+    {
+    }
+
     public function register(RegisterRequest $request)
     {
-        $user = User::create([
-            'name' => $request->string('name'),
-            'email' => $request->string('email'),
-            'password' => $request->string('password'),
-            'role' => Role::Employee,
-        ]);
+        $user = $this->userService->register($request->validated());
 
         return successResponse($user, 'Регистрация успешна', 201);
     }
@@ -51,23 +49,20 @@ class AuthController extends Controller
 
     public function employees()
     {
-        $employees = User::where('role', Role::Employee)->get();
-        return successResponse($employees, 'OK', 200);
+        return successResponse($this->userService->employees(), 'OK', 200);
     }
 
     public function deleteEmployee(int $id)
     {
-        $user = User::find($id);
+        $error = $this->userService->deleteEmployee($id);
 
-        if (!$user) {
+        if ($error === 'not_found') {
             return errorResponse('Сотрудник не найден', 404);
         }
 
-        if ($user->role === Role::Admin) {
+        if ($error === 'forbidden') {
             return errorResponse('Нельзя удалить администратора', 403);
         }
-
-        $user->delete();
 
         return successResponse(null, 'Сотрудник удалён', 200);
     }

@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ClassRoomService
 {
+    public function all(): Collection
+    {
+        return ClassRoom::with('building')->get();
+    }
+
+    public function find(int $id): ClassRoom
+    {
+        return ClassRoom::with('building')->findOrFail($id);
+    }
+
     public function search(array $filters): Collection
     {
         $query = ClassRoom::query();
@@ -23,6 +33,21 @@ class ClassRoomService
 
         return $query->limit(10)->get();
     }
+
+    public function store(array $data): ClassRoom
+    {
+        return ClassRoom::create($data);
+    }
+
+    public function update(ClassRoom $classRoom, array $data): ClassRoom
+    {
+        $classRoom->update($data);
+
+        return $classRoom->fresh('building');
+    }
+
+    public function delete(ClassRoom $classRoom): void
+    {
+        $classRoom->delete();
+    }
 }
-
-

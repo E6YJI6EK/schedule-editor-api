@@ -4,25 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Lessons\CreateLessonRequest;
 use App\Http\Requests\Lessons\GetScheduleRequest;
+use App\Http\Requests\Lessons\GetTimeSlotRequest;
+use App\Http\Requests\Lessons\UpdateLessonRequest;
+use App\Models\Lesson;
 use App\Services\LessonService;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LessonController extends Controller
 {
     public function __construct(private readonly LessonService $lessonService)
     {
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        return successResponse($this->lessonService->all(), 'Пары получены', 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function show(Lesson $lesson)
+    {
+        return successResponse($this->lessonService->find($lesson->id), 'Пара получена', 200);
+    }
+
     public function create(CreateLessonRequest $request)
     {
         $result = $this->lessonService->create($request->validated());
@@ -38,64 +40,20 @@ class LessonController extends Controller
         return successResponse($result['lesson'], 'Пара успешно создана', 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(\Illuminate\Http\Request $request)
+    public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        //
+        $updated = $this->lessonService->update($lesson, $request->validated());
+
+        return successResponse($updated, 'Пара была обновлена', 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(Lesson $lesson)
     {
-        //
+        $this->lessonService->delete($lesson);
+
+        return successResponse(null, 'Пара удалена', 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(\Illuminate\Http\Request $request, string $id)
-    {
-        try {
-            $request->validate([
-                'teacher_id' => 'integer|exists:teachers,id',
-                'class_room_id' => 'integer|exists:class_rooms,id',
-                'time_slot_id' => 'integer|exists:time_slots,id',
-                'discipline_id' => 'integer|exists:disciplines,id',
-                'group_id' => 'integer|exists:groups,id'
-            ]);
-            $lesson = \App\Models\Lesson::findOrFail($id);
-            $lesson->update($request->all());
-            return successResponse($lesson, 'Пара была обновлена', 200);
-        } catch (NotFoundHttpException $e) {
-            return errorResponse('Пара не найдена', 404, $e->getMessage());
-        } catch (\Exception $e) {
-            return errorResponse('Ошибка', 500, '');
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
-    /**
-     * Получить расписание для групп
-     */
     public function getSchedule(GetScheduleRequest $request)
     {
         $validated = $request->validated();
@@ -111,22 +69,9 @@ class LessonController extends Controller
         return successResponse($lessons, 'Расписание получено', 200);
     }
 
-    /**
-     * Получить ID временного слота по параметрам
-     */
-    public function getTimeSlot(\Illuminate\Http\Request $request)
+    public function getTimeSlot(GetTimeSlotRequest $request)
     {
-        $request->validate([
-            'week_type' => 'required|string|in:upper,lower',
-            'day' => 'required|integer|min:1|max:7',
-            'day_partition_id' => 'required|integer|min:1|max:6',
-        ]);
-
-        $timeSlot = \App\Models\TimeSlot::where([
-            'week_type' => $request->week_type,
-            'day' => $request->day,
-            'day_partition_id' => $request->day_partition_id,
-        ])->first();
+        $timeSlot = $this->lessonService->findTimeSlot($request->validated());
 
         if (!$timeSlot) {
             return errorResponse('Временной слот не найден', 404);

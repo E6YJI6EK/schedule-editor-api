@@ -10,7 +10,12 @@ class TeacherService
 {
     public function paginateLatest(int $perPage = 10): LengthAwarePaginator
     {
-        return Teacher::latest()->paginate($perPage);
+        return Teacher::with('disciplines')->latest()->paginate($perPage);
+    }
+
+    public function find(int $id): Teacher
+    {
+        return Teacher::with('disciplines')->findOrFail($id);
     }
 
     public function search(array $filters): Collection
@@ -29,6 +34,31 @@ class TeacherService
 
         return $query->limit(10)->get();
     }
+
+    public function store(array $data): Teacher
+    {
+        $teacher = Teacher::create(['name' => $data['name']]);
+
+        if (!empty($data['discipline_ids'])) {
+            $teacher->disciplines()->sync($data['discipline_ids']);
+        }
+
+        return $teacher->load('disciplines');
+    }
+
+    public function update(Teacher $teacher, array $data): Teacher
+    {
+        $teacher->update(['name' => $data['name'] ?? $teacher->name]);
+
+        if (array_key_exists('discipline_ids', $data)) {
+            $teacher->disciplines()->sync($data['discipline_ids']);
+        }
+
+        return $teacher->load('disciplines');
+    }
+
+    public function delete(Teacher $teacher): void
+    {
+        $teacher->delete();
+    }
 }
-
-

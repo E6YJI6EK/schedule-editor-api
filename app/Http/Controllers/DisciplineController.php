@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Disciplines\SearchDisciplinesRequest;
+use App\Http\Requests\Disciplines\StoreDisciplineRequest;
+use App\Http\Requests\Disciplines\UpdateDisciplineRequest;
 use App\Models\Discipline;
 use App\Services\DisciplineService;
 
@@ -11,61 +13,38 @@ class DisciplineController extends Controller
     public function __construct(private readonly DisciplineService $disciplineService)
     {
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        return successResponse($this->disciplineService->all(), 'Дисциплины получены', 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreDisciplineRequest $request)
     {
-        //
+        $discipline = $this->disciplineService->store($request->validated());
+
+        return successResponse($discipline, 'Дисциплина создана', 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(\Illuminate\Http\Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Discipline $discipline)
     {
-        //
+        return successResponse($this->disciplineService->find($discipline->id), 'Дисциплина получена', 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Discipline $discipline)
+    public function update(UpdateDisciplineRequest $request, Discipline $discipline)
     {
-        //
+        $updated = $this->disciplineService->update($discipline, $request->validated());
+
+        return successResponse($updated, 'Дисциплина обновлена', 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(\Illuminate\Http\Request $request, Discipline $discipline)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Discipline $discipline)
     {
-        //
+        $this->disciplineService->delete($discipline);
+
+        return successResponse(null, 'Дисциплина удалена', 200);
     }
+
     public function searchDisciplines(SearchDisciplinesRequest $request)
     {
         $disciplines = $this->disciplineService->search($request->validated());

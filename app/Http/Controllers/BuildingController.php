@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Buildings\SearchBuildingsRequest;
+use App\Http\Requests\Buildings\StoreBuildingRequest;
+use App\Http\Requests\Buildings\UpdateBuildingRequest;
+use App\Models\Building;
 use App\Services\BuildingService;
 
 class BuildingController extends Controller
@@ -10,60 +13,36 @@ class BuildingController extends Controller
     public function __construct(private readonly BuildingService $buildingService)
     {
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        return successResponse($this->buildingService->all(), 'Корпуса получены', 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreBuildingRequest $request)
     {
-        //
+        $building = $this->buildingService->store($request->validated());
+
+        return successResponse($building, 'Корпус создан', 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(\Illuminate\Http\Request $request)
+    public function show(Building $building)
     {
-        //
+        return successResponse($this->buildingService->find($building->id), 'Корпус получен', 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(UpdateBuildingRequest $request, Building $building)
     {
-        //
+        $updated = $this->buildingService->update($building, $request->validated());
+
+        return successResponse($updated, 'Корпус обновлён', 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(Building $building)
     {
-        //
-    }
+        $this->buildingService->delete($building);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(\Illuminate\Http\Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return successResponse(null, 'Корпус удалён', 200);
     }
 
     public function searchBuildings(SearchBuildingsRequest $request)

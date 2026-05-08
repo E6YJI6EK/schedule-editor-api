@@ -4,11 +4,24 @@ namespace App\Services;
 
 use App\Enums\WeekType;
 use App\Models\Lesson;
+use App\Models\TimeSlot;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 class LessonService
 {
+    public function all(): Collection
+    {
+        return Lesson::with(['teacher', 'classRoom.building', 'timeSlot.dayPartition', 'discipline', 'group'])
+            ->get();
+    }
+
+    public function find(int $id): Lesson
+    {
+        return Lesson::with(['teacher', 'classRoom.building', 'timeSlot.dayPartition', 'discipline', 'group'])
+            ->findOrFail($id);
+    }
+
     public function create(array $data): array
     {
         $exists = Lesson::where([
@@ -25,10 +38,22 @@ class LessonService
 
         try {
             $lesson = Lesson::create($data);
-            return ['lesson' => $lesson];
+            return ['lesson' => $lesson->load(['teacher', 'classRoom.building', 'timeSlot.dayPartition', 'discipline', 'group'])];
         } catch (Exception $e) {
             return ['exception' => $e->getMessage()];
         }
+    }
+
+    public function update(Lesson $lesson, array $data): Lesson
+    {
+        $lesson->update($data);
+
+        return $lesson->load(['teacher', 'classRoom.building', 'timeSlot.dayPartition', 'discipline', 'group']);
+    }
+
+    public function delete(Lesson $lesson): void
+    {
+        $lesson->delete();
     }
 
     public function getSchedule(array $groupIds, bool $isUpperWeek): Collection
@@ -44,10 +69,17 @@ class LessonService
                 'classRoom.building',
                 'timeSlot.dayPartition',
                 'discipline',
-                'group'
+                'group',
             ])
             ->get();
     }
+
+    public function findTimeSlot(array $filters): ?TimeSlot
+    {
+        return TimeSlot::where([
+            'week_type' => $filters['week_type'],
+            'day' => $filters['day'],
+            'day_partition_id' => $filters['day_partition_id'],
+        ])->first();
+    }
 }
-
-

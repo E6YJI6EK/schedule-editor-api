@@ -11,24 +11,22 @@ class GroupService
     {
         $query = Group::query();
 
-        if (!empty($filters['institute_id']) && method_exists(Group::class, 'institutes')) {
-            $query->whereHas('institutes', function ($q) use ($filters) {
-                $q->where('institutes.id', $filters['institute_id']);
-            });
+        if (!empty($filters['institute_id'])) {
+            $query->where('institute_id', $filters['institute_id']);
+        }
+
+        if (!empty($filters['course'])) {
+            $query->where('course', $filters['course']);
+        }
+
+        if (!empty($filters['education_form'])) {
+            $query->where('education_form', $filters['education_form']);
         }
 
         if (!empty($filters['name'])) {
-            return $query->where('name', 'like', '%' . $filters['name'] . '%')->get();
+            $query->where('name', 'like', '%' . $filters['name'] . '%');
         }
 
-        return $query->limit(10)->get();
-    }
-
-    public function searchGroupsByName(array $filters): Collection
-    {
-        $query = Group::query();
-        return $query->where('name', 'like', '%' . $filters['name'] . '%')->get();
+        return $query->limit(50)->get();
     }
 }
-
-
