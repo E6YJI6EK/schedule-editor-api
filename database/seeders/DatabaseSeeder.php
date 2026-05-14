@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             DayPartitionSeeder::class,
             TimeSlotSeeder::class,
             ClassRoomSeeder::class,
-            ExcelSeeder::class,
+            // ExcelSeeder::class,
             JsonScheduleSeeder::class,
         ]);
     }
