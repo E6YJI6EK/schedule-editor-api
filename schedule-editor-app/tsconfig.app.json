@@ -1,0 +1,26 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "skipLibCheck": true,
+  "lib": ["esnext", "dom"],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "types": ["vite/client", "vitest/globals"],
+    "lib": ["es2016", "dom"],
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*",
+      ],
+      "*": ["*", "*.ts", "*.tsx", "*.vue"],
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  
+}
