@@ -1,0 +1,153 @@
+<tbody>
+    <tr>
+        <td>
+            <input
+                align="middle"
+                id="clock_tametable"
+                name="full"
+                size="43"
+                style="border: none; font-size: 1em; color: #777; width: 300px"
+            /><br />
+            <br />
+            <br />
+            <b>Расписание занятий Учебный комплекс №1:</b><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk1/institut-genetiki-i-agronomii"
+                >Институт генетики и агрономии</a
+            ><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk1/institut-agrobiznesa"
+                >Институт агробизнеса</a
+            ><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk1/ekzamenacionnaya-sessiya"
+                >Экзаменационная сессия</a
+            ><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk1/nedeli-semestra-uchebnogo-goda"
+                >Недели семестра учебного года</a
+            ><br />
+            <br />
+            <b>Расписание занятий Учебный комплекс №2:</b><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk2/institut-injenerii-i-robototexniki"
+                >Институт инженерии и робототехники</a
+            ><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk2/ekzamenacionnaya-sessiya"
+                >Экзаменационная сессия</a
+            ><br />
+            <br />
+            <b>Расписание занятий Учебный комплекс №3:</b><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk3/institut-biotexnologii"
+                >Институт биотехнологии</a
+            ><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk3/institut-veterinarnoi-mediciny-i-farmacii"
+                >Институт ветеринарной медицины и фармации</a
+            ><br />
+            <br />
+            <a
+                href="/upravlenie-obespecheniya-kachestva-obrazovaniya/struktura/otdel-organizacii-uchebnogo-processa/uk3/ekzamenacionnaya-sessiya"
+                >Экзаменационная сессия</a
+            ><br />
+            <br />
+            <b
+                ><a
+                    href="/upravlenie-nauchno-innovacionnoi-deyatelnosti/aspirantura/raspisanie"
+                    >Расписание занятий Аспирантура</a
+                ></b
+            >
+        </td>
+        <td width="150">
+            <div id="calendar">
+                <table width="150" height="250" border="2">
+                    <tbody>
+                        <tr>
+                            <td align="center">Среда</td>
+                        </tr>
+                        <tr>
+                            <td align="center">Май</td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <div style="font-size: 32px">13</div>
+                                <div style="color: blue">Нижняя неделя</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <script>
+                const today = new Date();
+                const year = today.getFullYear();
+
+                // 5 января — НИЖНЯЯ неделя
+                const baseDate = new Date(year, 0, 5);
+
+                // разница в днях
+                const diffDays = Math.floor(
+                    (today - baseDate) / (1000 * 60 * 60 * 24),
+                );
+
+                // номер недели от опорной даты
+                const weekIndex = Math.floor(diffDays / 7);
+
+                // тип недели
+                const weekType = weekIndex % 2 === 0 ? "Нижняя" : "Верхняя";
+
+                // названия
+                const days = [
+                    "Воскресенье",
+                    "Понедельник",
+                    "Вторник",
+                    "Среда",
+                    "Четверг",
+                    "Пятница",
+                    "Суббота",
+                ];
+                const months = [
+                    "Январь",
+                    "Февраль",
+                    "Март",
+                    "Апрель",
+                    "Май",
+                    "Июнь",
+                    "Июль",
+                    "Август",
+                    "Сентябрь",
+                    "Октябрь",
+                    "Ноябрь",
+                    "Декабрь",
+                ];
+
+                document.getElementById("calendar").innerHTML = `
+  <table width="150" height="250" border="2">
+    <tr><td align="center">${days[today.getDay()]}</td></tr>
+    <tr><td align="center">${months[today.getMonth()]}</td></tr>
+    <tr>
+      <td align="center">
+        <div style="font-size:32px">${today.getDate()}</div>
+        <div style="color:blue">${weekType} неделя</div>
+      </td>
+    </tr>
+    <tr><td align="center">${year}</td></tr>
+  </table>
+`;
+            </script>
+        </td>
+    </tr>
+</tbody>

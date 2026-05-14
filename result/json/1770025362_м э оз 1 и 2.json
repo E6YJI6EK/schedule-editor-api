@@ -1,0 +1,380 @@
+[
+  {
+    "column_0": "",
+    "column_1": null,
+    "column_2": null,
+    "column_3": ""
+  },
+  {
+    "column_0": "",
+    "column_1": null,
+    "column_2": null,
+    "column_3": ""
+  },
+  {
+    "column_0": "Расписание занятий",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  },
+  {
+    "column_0": "на 2 семестр 2024-2025 учебного года",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  },
+  {
+    "column_0": "институт агробизнеса 1 и 2 курс",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  },
+  {
+    "column_0": "Дни",
+    "column_1": "Часы",
+    "column_2": "М-Эв-БУ-101 04.02.2026",
+    "column_3": "М-Эв-БУ-201 02.02.2026"
+  },
+  {
+    "column_0": "киньледеноП",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "кинротВ",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "лек. ЭКОНОМИЧЕСКИЙ АНАЛИЗ (продв.уровень) доц. Кондак В.В. 242",
+    "column_3": "пр.з. Учет и оптимизация налогообложений организаций Котар О.К. 257"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "пр.з. Экономический анализ (продв. уровень) Шарикова И.В. , Кувшинова Е.А. 134 к",
+    "column_3": "пр.з. Учет и оптимизация налогообложений организаций Котар О.К. 257"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "пр.з. Эконометрика (продв.уровень) Волощук Л.А. 230",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "17.00-18.30",
+    "column_2": "лек.. СТРАТЕГИЧЕСКИЙ МЕНЕДЖМЕНТ проф. Александрова Л.А. 316",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "пр.з. Стратегический менеджмент Александрова Л.А. 316",
+    "column_3": ""
+  },
+  {
+    "column_0": "адерС",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "",
+    "column_3": "пр.з. Учет и анализ инвестиций"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "лек. ОРГАНИЗАЦИЯ РАБОТЫ В МАЛЫХ ГРУППАХ ст.пр. Антипова Е.Ю. 526",
+    "column_3": "Лысова Т.А. 255"
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "пр.з. Оценка и составление прогнозного баланса Кондак В.В. 134 к",
+    "column_3": "лек. УЧЕТ И АНАЛИЗ ИНВЕСТИЦИЙ доц. Лысова Т.А. 255"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "пр.з .Организация работы в малых группах Антипова Е.Ю. 526",
+    "column_3": "лек. БУХГАЛТЕРСКАЯ ЭКСПЕРТИЗА И УЧЕТ В УСЛОВИЯХ БАНКРОТСТВА доц. Лысова Т.А. 255"
+  },
+  {
+    "column_0": null,
+    "column_1": "17.00-18.30",
+    "column_2": "лек. ОЦЕНКА И СОСТАВЛЕНИЕ ПРОГНОЗНОГО БАЛАНСА доц. Кондак В.В. 134 к",
+    "column_3": "пр.з. Бухгалтерская экспертиза в условиях банкротства Лысова Т.А. 257"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "гревтеЧ",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "лек. СОВРЕМЕННЫЕ СИСТЕМЫ УЧЕТА ЗАТРАТ доц. Лысова Т.А. 242",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "лек. ФИЛОСОФИЯ ПОЗНАНИЯ проф. Дудникова Е.Б. 440",
+    "column_3": "пр.з. Внутренний аудит (продвинутый уровень)"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "пр.з. Совресенные системы учета затрат Лысова Т.А. 242",
+    "column_3": "Шаронова Е.В., Павлик А.С. 134 к / 241"
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "пр.з. Философия познания Дудникова Е.Б. 440",
+    "column_3": "пр.з. Бухгалтерские компьютерные программы"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": "Шаронова Е.В., Павлик А.С. 134 к"
+  },
+  {
+    "column_0": null,
+    "column_1": "17.00-18.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "ацинтяП",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "атоббуС",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  }
+]

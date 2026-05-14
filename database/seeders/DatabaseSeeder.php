@@ -20,13 +20,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // Сидеры для расписания
         $this->call([
-            ExcelSeeder::class,
-            ClassRoomSeeder::class,
-            DayPartitionSeeder::class,
+            AdminUserSeeder::class,
             BuildingSeeder::class,
+            DayPartitionSeeder::class,
             TimeSlotSeeder::class,
+            ClassRoomSeeder::class,
+            ExcelSeeder::class,
+            JsonScheduleSeeder::class,
         ]);
     }
 }

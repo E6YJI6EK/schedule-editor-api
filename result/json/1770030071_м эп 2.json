@@ -1,0 +1,392 @@
+[
+  {
+    "column_0": "",
+    "column_1": null,
+    "column_2": null,
+    "column_3": ""
+  },
+  {
+    "column_0": "",
+    "column_1": null,
+    "column_2": null,
+    "column_3": ""
+  },
+  {
+    "column_0": "Расписание занятий",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  },
+  {
+    "column_0": "на 2 семестр 2025-2026 учебного года",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  },
+  {
+    "column_0": "институт генетики и агрономии 1 курс",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  },
+  {
+    "column_0": "",
+    "column_1": "",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "инД",
+    "column_1": "Часы",
+    "column_2": "М-АА-101 с 29.12.2025",
+    "column_3": "М-ЭП-УР-101 с 22.12.2025"
+  },
+  {
+    "column_0": "киньледеноП",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "пр.з. Инновационные технологии в земледелии с использованием современной техники",
+    "column_3": "пр.з. Оценка воздействия на окружающую среды"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "Преймак С.А. 133",
+    "column_3": "Мохонько Ю.М. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "лек. ЭКОЛОГИЧЕСКОЕ ЗЕМЛЕДЕЛИЕ проф. Солодовников А.П. 603",
+    "column_3": "пр.з. Основы научных исследований в экологии и природопользовании"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "лдек. КОМПЛЕКСНЫЙ ЭКОЛОГИЧЕСКИЙ МОНИТОРИНГ доц. Пономарева А.Л. 446",
+    "column_3": "Шевченко Е.Н. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "пр.з. Комплексный экологический мониторинг",
+    "column_3": "пр.з.. Экологическое нормирование"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "Пономарева А.Л. 446",
+    "column_3": "Андриянова Ю.М. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "пр.з. Устойчивое развитие сельских территорий",
+    "column_3": "лек. ЭКОЛОГИЧЕСКОЕ НОРМИРОВАНИЕ доц. Андриянова Ю.М. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "Пономарева А.Л. 446",
+    "column_3": "лек. ОСНОВЫ НАУЧНЫХ ИССЛЕД. В ЭКОЛОГИИ И ПРИРОДОПОЛЬЗОВАНИИ проф. Сергеева И.В. 336"
+  },
+  {
+    "column_0": "кинротВ",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "лек. ИННОВАЦИОННЫЕ ТЕХНОЛОГИИ В ЗЕМЛЕДЕЛИИ доц. Сураев Д.В. 133",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "лек. АПРОБАЦИЯ РЕЗУЛЬТАТОВ НИС доц. Ткаченко О.В. 903",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "лек. УСТОЙЧИВОЕ РАЗВИТИЕ СЕЛЬСКИХ ТЕРРИТОРИЙ доц. Пономарева А.Л. 446",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "пр.з. Экологическое земледелие",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "Солодовников А.П., Преймак С.А. 603",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "адерС",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "",
+    "column_3": "пр.з. Экологические методы исследований"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": "Пономарева А.Л. 326"
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "",
+    "column_3": "лек. ЭКОЛОГИЧЕСКИЙ АУДИТ доц. Пономарева А.Л. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": "лек. ЭКОЛОГИЧЕСКИЕ МЕТОДЫ ИССЛЕДОВАНИЙ доц. Пономарева А.Л. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": "17.00-18.30",
+    "column_2": "",
+    "column_3": "пр. з. Экологический аудит"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": "Стюшина Р.Н. 336"
+  },
+  {
+    "column_0": "гревтеЧ",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "пр.з. Апробация результатов НИС Беляева А.А. 712",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "пр.з. Апробация результатов НИС Беляева А.А. 712",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "лек. ИННОВАЦИОННЫЕ АГРОТЕХНОЛОГИИ доц. Шьюрова Н.А. 712",
+    "column_3": "лек. ЭКОЛОГИЧЕСКОЕ ПРОГНОЗИРОВАНИЕ доц. Сагатов М.А. 328"
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "пр.з. Инновационные агротехнологии",
+    "column_3": "пр.з.. Экологическое прогнозирование"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "Шьюрова Н.А. 712",
+    "column_3": "Стюшина Р.Н. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "",
+    "column_3": "лек. ОЦЕНКА ВОЗДЕЙСТВИЯ НА ОКРУЖАЮЩУЮ СРЕДУ доц. Мохонько Ю.М. 336"
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "ацинтяП",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "12.00-13.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "13.40-15.10",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "15.20-16.50",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "17.00-18.30",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "атоббуС",
+    "column_1": "8.30-10.00",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": null,
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": null,
+    "column_1": "10.10-11.40",
+    "column_2": "",
+    "column_3": ""
+  },
+  {
+    "column_0": "",
+    "column_1": null,
+    "column_2": null,
+    "column_3": null
+  }
+]
