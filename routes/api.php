@@ -4,6 +4,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\DayPartitionController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LessonController;
@@ -22,6 +23,8 @@ Route::get('/groups/search', [GroupController::class, 'searchGroups'])->name('gr
 Route::get('/groups/search-by-name', [GroupController::class, 'searchGroupsByName'])->name('groups.searchByName');
 
 // Read (public)
+Route::get('/day-partitions', [DayPartitionController::class, 'index'])->name('dayPartitions.index');
+
 Route::get('/buildings', [BuildingController::class, 'index'])->name('buildings.index');
 Route::get('/buildings/{building}', [BuildingController::class, 'show'])->name('buildings.show');
 Route::get('/class-rooms', [ClassRoomController::class, 'index'])->name('classRooms.index');
@@ -70,5 +73,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');
         Route::put('/teachers/{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
         Route::delete('/teachers/{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
+
+        Route::post('/day-partitions', [DayPartitionController::class, 'store'])->name('dayPartitions.store');
+        Route::put('/day-partitions/{dayPartition}', [DayPartitionController::class, 'update'])->name('dayPartitions.update');
+        Route::delete('/day-partitions/{dayPartition}', [DayPartitionController::class, 'destroy'])->name('dayPartitions.destroy');
     });
 });
