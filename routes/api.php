@@ -36,6 +36,8 @@ Route::get('/teachers/{teacher}', [TeacherController::class, 'show'])->name('tea
 Route::get('/lessons/schedule', [LessonController::class, 'getSchedule'])->name('lessons.schedule');
 Route::get('/lessons/schedule/by-teacher', [LessonController::class, 'getScheduleByTeacher'])->name('lessons.schedule.byTeacher');
 Route::get('/lessons/schedule/by-classroom', [LessonController::class, 'getScheduleByClassroom'])->name('lessons.schedule.byClassroom');
+Route::get('/lessons/schedule/export/excel', [LessonController::class, 'exportExcel'])->name('lessons.schedule.exportExcel');
+Route::get('/lessons/schedule/export/pdf', [LessonController::class, 'exportPdf'])->name('lessons.schedule.exportPdf');
 Route::get('/lessons/time-slot', [LessonController::class, 'getTimeSlot'])->name('lessons.timeSlot');
 Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
 Route::get('/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');

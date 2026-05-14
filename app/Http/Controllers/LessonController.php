@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Lessons\CreateLessonRequest;
+use App\Http\Requests\Lessons\ExportScheduleRequest;
 use App\Http\Requests\Lessons\GetScheduleByClassroomRequest;
 use App\Http\Requests\Lessons\GetScheduleByTeacherRequest;
 use App\Http\Requests\Lessons\GetScheduleRequest;
@@ -10,11 +11,15 @@ use App\Http\Requests\Lessons\GetTimeSlotRequest;
 use App\Http\Requests\Lessons\UpdateLessonRequest;
 use App\Models\Lesson;
 use App\Services\LessonService;
+use App\Services\ScheduleExportService;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LessonController extends Controller
 {
-    public function __construct(private readonly LessonService $lessonService)
-    {
+    public function __construct(
+        private readonly LessonService $lessonService,
+        private readonly ScheduleExportService $exportService,
+    ) {
     }
 
     public function index()
@@ -110,5 +115,28 @@ class LessonController extends Controller
         }
 
         return successResponse(['id' => $timeSlot->id], 'Временной слот найден', 200);
+    }
+
+    public function exportExcel(ExportScheduleRequest $request)
+    {
+        $groupIds = $request->validated()['group_ids'];
+        $path = $this->exportService->exportExcel($groupIds);
+        $date = now()->format('d_m_Y');
+
+        return response()->download($path, "Расписание_{$date}.xlsx", [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ])->deleteFileAfterSend();
+    }
+
+    public function exportPdf(ExportScheduleRequest $request)
+    {
+        $groupIds = $request->validated()['group_ids'];
+        $data = $this->exportService->buildViewData($groupIds);
+        $date = now()->format('d_m_Y');
+
+        $pdf = Pdf::loadView('schedule-pdf', $data)
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download("Расписание_{$date}.pdf");
     }
 }
