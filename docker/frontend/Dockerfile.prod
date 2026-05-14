@@ -6,7 +6,11 @@ COPY schedule-editor-app/package*.json ./
 RUN npm ci
 
 COPY schedule-editor-app ./
-RUN npm run build
+
+ARG VITE_API_BASE=/api
+ENV VITE_API_BASE=${VITE_API_BASE}
+
+RUN npx vite build
 
 FROM node:20-alpine AS runner
 
