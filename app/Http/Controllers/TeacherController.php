@@ -16,7 +16,7 @@ class TeacherController extends Controller
 
     public function index()
     {
-        return successResponse($this->teacherService->paginateLatest(10), 'Преподаватели получены', 200);
+        return successResponse($this->teacherService->all(), 'Преподаватели получены', 200);
     }
 
     public function store(StoreTeacherRequest $request)

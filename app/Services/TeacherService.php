@@ -3,14 +3,13 @@
 namespace App\Services;
 
 use App\Models\Teacher;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 class TeacherService
 {
-    public function paginateLatest(int $perPage = 10): LengthAwarePaginator
+    public function all(): Collection
     {
-        return Teacher::with('disciplines')->latest()->paginate($perPage);
+        return Teacher::with('disciplines')->orderBy('name')->get();
     }
 
     public function find(int $id): Teacher
